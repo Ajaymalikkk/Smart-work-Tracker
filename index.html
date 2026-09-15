@@ -1,0 +1,105 @@
+SMART WORK TRACKER
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Work Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Smart Work Tracker</h1>
+
+    <h2>Dashboard</h2>
+
+<div class="dashboard">
+    <div>Total Tasks: <span id="totalTasks">0</span></div>
+    <div>Todo: <span id="todoTasks">0</span></div>
+    <div>In Progress: <span id="progressTasks">0</span></div>
+    <div>Completed: <span id="completedTasks">0</span></div>
+</div>
+
+    <!--extra-->
+    <h2>List</h2>
+    <div class="list">
+        <div>List-1</div>
+        <div>List-2</div>
+        <div>List-3</div>
+    </div>
+
+
+    <!-- Search and Filters -->
+    <h2>Search & Filters</h2>
+
+    
+    <input type="text" id="searchInput" placeholder="Search tasks">
+
+<select id="statusFilter">
+    <option value="">Status</option>
+    <option value="Todo">Todo</option>
+    <option value="In Progress">In Progress</option>
+    <option value="Completed">Completed</option>
+</select>
+
+<select id="priorityFilter">
+    <option value="">Priority</option>
+    <option value="High">High</option>
+    <option value="Medium">Medium</option>
+    <option value="Low">Low</option>
+</select>
+
+<select id="tagFilter">
+    <option value="">Tag</option>
+    <option value="Frontend">Frontend</option>
+    <option value="Backend">Backend</option>
+    <option value="React">React</option>
+    <option value="API">API</option>
+    <option value="Bug">Bug</option>
+</select>
+
+
+
+
+    <!-- Task List -->
+    <h2>Task List</h2>
+
+<div id="taskList"></div>
+
+    <!-- Add Task -->
+    <h2>Add Task</h2>
+
+    <form id="taskForm">
+    
+        <input id="taskId" type="number" placeholder="Task ID">
+    
+        <input id="title" type="text" placeholder="Title">
+    
+        <input id="assignee" type="text" placeholder="Assignee">
+    
+        <select id="status">
+            <option value="">Status</option>
+            <option value="Todo">Todo</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+        </select>
+    
+        <select id="priority">
+            <option value="">Priority</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+        </select>
+    
+        <input id="tags" type="text" placeholder="Tags">
+    
+        <button type="submit">Add Task</button>
+    
+    </form>
+    
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+```
