@@ -1,4 +1,4 @@
-const tasks = [
+const defaultTasks = [
     {
         id: 101,
         title: "Create Login Page",
@@ -24,7 +24,23 @@ const tasks = [
         tags: ["Bug", "Frontend"]
     }
 ];
+function saveTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
 
+function getTasks() {
+    const data = localStorage.getItem("tasks");
+
+    if (data === null) {
+        return null;
+    }
+
+    return JSON.parse(data);
+}
+
+const savedTasks = getTasks();
+
+const tasks = savedTasks !== null ? savedTasks : defaultTasks;
 const taskList = document.getElementById("taskList");
 
 const searchInput = document.getElementById("searchInput");
@@ -95,7 +111,7 @@ function deleteTask(id) {
     if (index !== -1) {
         tasks.splice(index, 1);
     }
-
+    saveTasks();
     updateDashboard();
     filterTasks();
 }
@@ -120,6 +136,7 @@ function editTask(id) {
     const newprioprity = prompt("enter the priority" , task.priority)
     if(newprioprity !==null)
         task.priority=newprioprity;
+    saveTasks();
     updateDashboard();
     filterTasks();
 }
@@ -146,7 +163,7 @@ form.addEventListener("submit", function (event) {
     };
 
     tasks.push(newTask);
-
+    saveTasks();
     form.reset();
 
     updateDashboard();
