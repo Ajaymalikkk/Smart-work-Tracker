@@ -53,7 +53,9 @@ const todoTasks = document.getElementById("todoTasks");
 const progressTasks = document.getElementById("progressTasks");
 const completedTasks = document.getElementById("completedTasks");
 
-function filterall(status) {
+
+
+function getTasksbyStatus(status) {
     return tasks.filter(function(task) {
         return task.status === status;
     });
@@ -62,9 +64,9 @@ function filterall(status) {
 function updateDashboard() {
 
     document.getElementById("totalTasks").textContent = tasks.length;
-    document.getElementById("todoTasks").textContent = filterall("Todo").length;
-    document.getElementById("progressTasks").textContent = filterall("In Progress").length;
-    document.getElementById("completedTasks").textContent = filterall("Completed").length;
+    document.getElementById("todoTasks").textContent = getTasksbyStatus("Todo").length;
+    document.getElementById("progressTasks").textContent = getTasksbyStatus("In Progress").length;
+    document.getElementById("completedTasks").textContent = getTasksbyStatus("Completed").length;
 }
 
 function showTasks(taskArray) {
@@ -131,14 +133,40 @@ function editTask(id) {
         task.assignee= newAssignee;
     }
     const newStatus = prompt("enter new status", task.status)
-    if(newStatus !==null )
+    if (
+        newStatus !== "Todo" &&
+        newStatus !== "In Progress" &&
+        newStatus !== "Completed"
+    ) {
+        alert("Invalid status");
+        return;
+    }
         task.status=newStatus;
     const newprioprity = prompt("enter the priority" , task.priority)
-    if(newprioprity !==null)
+    if (
+        newprioprity !== "High" &&
+        newprioprity !== "Medium" &&
+        newprioprity !== "Low"
+    ) {
+        alert("Invalid priority");
+        return;
+    }
         task.priority=newprioprity;
-    saveTasks();
-    updateDashboard();
-    filterTasks();
+        const newTags = prompt(
+            "Enter the Tags separated by commas:",
+            task.tags.join(", ")
+        );
+        
+        if (newTags !== null) {
+            task.tags = newTags
+                .split(",")
+                .map(tag => tag.trim())
+                .filter(tag => tag !== "");
+        }
+        
+        saveTasks();
+        updateDashboard();
+        filterTasks();
 }
 
 searchInput.addEventListener("input", filterTasks);
@@ -159,8 +187,16 @@ form.addEventListener("submit", function (event) {
         assignee: document.getElementById("assignee").value,
         status: document.getElementById("status").value,
         priority: document.getElementById("priority").value,
-        tags: document.getElementById("tags").value.split(",")
-    };
+        tags: document.getElementById("tags").value
+        .split(",")
+        .map(tag => tag.trim())
+        .filter(tag => tag !== "")    };
+    const exists = tasks.some(task => task.id === newTask.id);
+
+if (exists) {
+    alert("Task ID already exists");
+    return;
+}
 
     tasks.push(newTask);
     saveTasks();
