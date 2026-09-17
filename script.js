@@ -191,7 +191,7 @@ form.addEventListener("submit", function (event) {
         .split(",")
         .map(tag => tag.trim())
         .filter(tag => tag !== "")    };
-    const exists = tasks.some(task => task.id === newTask.id);
+    const exists = tasks.find(task => task.id === newTask.id);
 
 if (exists) {
     alert("Task ID already exists");
